@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="jamo" id="1">
+        <createTable tableName="rental_unit">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tax_rate" type="NUMBER"/>
+            <column name="cleaning_fee" type="CURRENCY"/>
+            <column name="calendar_id" type="VARCHAR(255)"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="person"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="jamo" id="2">
+        <createTable tableName="rental_rate">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column autoIncrement="true" name="rental_unit_id" type="INT"/>
+            <column name="begin_date" type="DATETIME"/>
+            <column name="end_date" type="DATETIME"/>
+            <column name="minimum_stay" type="INT"/>
+            <column name="price" type="CURRENCY"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="person"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="jamo" id="insert-units">
+        <insert dbms="h2" tableName="rental_unit">
+            <column name="name" value="unit-1"/>
+            <column name="tax_rate" value="0.2345"/>
+            <column name="cleaning_fee" value="123.45"/>
+            <column name="calendar_id" value="3456"/>
+        </insert>
+
+        <insert dbms="h2" tableName="rental_rate">
+            <column name="begin_date" value="2019-01-01"/>
+            <column name="end_date" value="2019-02-28"/>
+            <column name="minimum_stay" value="5"/>
+            <column name="price" value="99.95"/>
+            <column name="name" value="rate-1.1"/>
+            <column name="rental_unit_id" value="1"/>
+        </insert>
+        <insert dbms="h2" tableName="rental_rate">
+            <column name="begin_date" value="2019-03-01"/>
+            <column name="end_date" value="2019-05-31"/>
+            <column name="minimum_stay" value="3"/>
+            <column name="price" value="200.00"/>
+            <column name="name" value="rate-1.2"/>
+            <column name="rental_unit_id" value="1"/>
+        </insert>
+        <insert dbms="h2" tableName="rental_rate">
+            <column name="begin_date" value="2019-06-01"/>
+            <column name="end_date" value="2019-09-30"/>
+            <column name="minimum_stay" value="4"/>
+            <column name="price" value="400.00"/>
+            <column name="name" value="rate-1.3"/>
+            <column name="rental_unit_id" value="1"/>
+        </insert>
+
+        <insert dbms="h2" tableName="rental_unit">
+            <column name="name" value="unit-2"/>
+            <column name="tax_rate" value="0.123"/>
+            <column name="cleaning_fee" value="199.99"/>
+            <column name="calendar_id" value="9876"/>
+        </insert>
+        <insert dbms="h2" tableName="rental_rate">
+            <column name="begin_date" value="2019-01-01"/>
+            <column name="end_date" value="2019-02-28"/>
+            <column name="minimum_stay" value="7"/>
+            <column name="price" value="200.00"/>
+            <column name="name" value="rate-2.1"/>
+            <column name="rental_unit_id" value="2"/>
+        </insert>
+        <insert dbms="h2" tableName="rental_rate">
+            <column name="begin_date" value="2019-03-01"/>
+            <column name="end_date" value="2019-05-31"/>
+            <column name="minimum_stay" value="5"/>
+            <column name="price" value="250.00"/>
+            <column name="name" value="rate-2.2"/>
+            <column name="rental_unit_id" value="2"/>
+        </insert>
+
+    </changeSet>
+
+
+</databaseChangeLog>
