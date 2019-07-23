@@ -17,7 +17,7 @@
             <column name="calendar_id" type="VARCHAR(255)"/>
         </createTable>
         <rollback>
-            <dropTable tableName="person"/>
+            <dropTable tableName="rental_unit"/>
         </rollback>
     </changeSet>
 
@@ -34,7 +34,7 @@
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
         <rollback>
-            <dropTable tableName="person"/>
+            <dropTable tableName="rental_rate"/>
         </rollback>
     </changeSet>
 
