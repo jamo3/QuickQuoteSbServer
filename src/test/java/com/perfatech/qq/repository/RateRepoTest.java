@@ -21,16 +21,15 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RateRepoTest
-{
+public class RateRepoTest {
+
     @Autowired
     private RateRepo rateRepo;
 
     @Test
-    public void findByUnitName()
-    {
+    public void findByUnitName() {
         // test data added via changelog file  qq-db-V0.0.1.xml
-        List<Rate> ratesForUnit1 = rateRepo.findByUnitNameOrderByBeginDate("unit-1");
+        List<Rate> ratesForUnit1 = rateRepo.findByUnitIdOrderByBeginDate(1L);
         assertFalse(ratesForUnit1.isEmpty());
 
         Rate rate = ratesForUnit1.get(0);
@@ -47,14 +46,13 @@ public class RateRepoTest
     }
 
     @Test
-    public void getPriceForDate()
-    {
+    public void getRateForDate()  {
         // test data added via changelog file  qq-db-V0.0.1.xml
         String date = "2019-07-17";  //default, ISO_LOCAL_DATE
         LocalDate rentalDate = LocalDate.parse(date);
 
-        Optional<Rate> optRate = rateRepo.findByBeginDateBeforeAndEndDateAfterAndUnitName(
-            rentalDate, rentalDate, "unit-1");
+        Optional<Rate> optRate = rateRepo.findByBeginDateBeforeAndEndDateAfterAndUnitId(
+            rentalDate, rentalDate, 1L);
         assertTrue(optRate.isPresent());
         Rate rate = optRate.get();
         assertEquals("400.00", rate.getPrice().toString());

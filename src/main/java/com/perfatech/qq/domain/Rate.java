@@ -1,5 +1,10 @@
 package com.perfatech.qq.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,9 +38,13 @@ public class Rate implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     @Column
     private LocalDate beginDate;
 
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     @Column
     private LocalDate endDate;
 
@@ -48,14 +57,16 @@ public class Rate implements Serializable{
     @Column
     private String name;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="rental_unit_id")
     private Unit unit;
 
+
     public Rate() {
     }
 
-    public Rate(LocalDate beginDate, LocalDate endDate, Integer minimumStay, BigDecimal price, String name, Unit rentalUnit)
+    Rate(LocalDate beginDate, LocalDate endDate, Integer minimumStay, BigDecimal price, String name, Unit rentalUnit)
     {
         this.beginDate = beginDate;
         this.endDate = endDate;

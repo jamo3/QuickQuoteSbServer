@@ -4,10 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class QqserverApplication {
+public class QqServerApplication
+{
 
 	public static void main(String[] args) {
-		SpringApplication.run(QqserverApplication.class, args);
+		SpringApplication.run(QqServerApplication.class, args);
 	}
 
 }

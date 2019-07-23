@@ -28,7 +28,7 @@ import java.math.BigDecimal;
 public class Unit implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column
     private String name;
@@ -47,7 +47,7 @@ public class Unit implements Serializable{
         this.cleaningFee = BigDecimal.ZERO;
     }
 
-    public Unit(String name, BigDecimal taxRate, BigDecimal cleaningFee, String calendarId)
+    Unit(String name, BigDecimal taxRate, BigDecimal cleaningFee, String calendarId)
     {
         this.name = name;
         this.taxRate = taxRate;
